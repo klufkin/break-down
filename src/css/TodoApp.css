@@ -1,0 +1,39 @@
+.todo-list {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0px 7px 13px 4px rgba(0,0,0,.22);
+    color: #fff;
+}
+
+.todo-item {
+    list-style-type: none;
+}
+
+.todo-info {
+    display: flex;
+    padding: 12px;
+    margin-bottom: 2px;
+    justify-content: space-between;
+    background-color: #408bff;
+    text-align: left;
+}
+
+.step-list {
+    padding: 0;
+    margin-left: 20px;
+    color: #fff;
+    text-align: left;
+}
+
+.step-list li {
+    padding: 12px;
+    background: #08bf6e;
+    border-bottom: 2px solid #ffffff;
+}
+
+.todo-step {
+    display: flex;
+    justify-content: space-between;
+}
