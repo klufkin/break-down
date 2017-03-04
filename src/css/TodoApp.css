@@ -1,7 +1,12 @@
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
     margin: 0;
     padding: 0;
+    outline: 0;
+    border: 0;
 }
 
 body, ul, li, input {
@@ -89,7 +94,7 @@ body, ul, li, input {
     display: flex;
     -ms-align-items: center;
     align-items: center;
-    height: 48px;
+    min-height: 48px;
     margin-bottom: 2px;
     justify-content: space-between;
     background-color: #3b4254;
@@ -107,7 +112,6 @@ body, ul, li, input {
 }
 
 .step-list li {
-    height: 48px;
     background: #2f3545;
     margin-bottom: 2px;
 }
@@ -115,4 +119,53 @@ body, ul, li, input {
 .todo-step {
     display: flex;
     justify-content: space-between;
+    -ms-align-items: center;
+    align-items: center;
+}
+
+/* ------------- Text Area Multiline Hack ---------------- */
+.expandingTextArea {
+  position: relative;
+  width: 100%;
+}
+
+.expandingTextArea > textarea,
+.expandingTextArea > .dummy-container {
+  padding: 5px;
+  background: transparent;
+  font: 400 14px/16px helvetica, arial, sans-serif;
+  /* Make the text soft-wrap */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.expandingTextArea > textarea {
+  /* The border-box box model is used to allow
+   * padding whilst still keeping the overall width
+   * at exactly that of the containing element.
+   */
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  /* This height is used when JS is disabled */
+  height: 100px;
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+  color: #e8eaf6;
+  background: rgba(59, 66, 84, 0);
+  font-size: 14px;
+}
+
+.expandingTextArea > .dummy-container {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
 }

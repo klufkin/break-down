@@ -1,4 +1,5 @@
 import React from "react";
+import StepContent from "./StepContent";
 import StepList from "./StepList";
 
 class Todo extends React.Component {
@@ -36,6 +37,7 @@ class Todo extends React.Component {
     }
 
     loseFocus(event, key){
+        console.log(event);
         // If value does not exist remove step.
         if(!event.target.value)
             this.props.remove(key);
@@ -84,10 +86,12 @@ class Todo extends React.Component {
                 <div className="todo-info" onClick={()=> this.updateSelection()}>
                     {this.renderStepCount()}
 
-                    <input autoFocus type="text" value={this.props.todo.text}
-                        onChange={(event) => this.props.editTodo(event.target.value, this.props.index)}
-                        onBlur={(event) => this.loseFocus(event, this.props.index)}
-                        onKeyUp={(event) => this.hitEnter(event)}
+                    <StepContent
+                        todo={this.props.todo}
+                        index={this.props.index}
+                        editTodo={this.props.editTodo}
+                        addTodo={this.props.addTodo}
+                        removeStep={this.props.remove}
                     />
 
                     <div className="todo-action-buttons">

@@ -6,7 +6,8 @@ const Title = () => {
             <img src="#" alt="logo"/>
             <h1>
                 Break
-                <span className="down"> down</span>
+                <span className="down">
+                    down</span>
             </h1>
         </div>
     );
