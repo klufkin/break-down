@@ -2,9 +2,11 @@ import React from "react";
 
 const Title = () => {
     return (
-        <div>
+        <div className="breakdown-logo">
+            <img src="#" alt="logo"/>
             <h1>
-                Todo List
+                Break
+                <span className="down"> down</span>
             </h1>
         </div>
     );

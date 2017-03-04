@@ -11,9 +11,9 @@ class TodoApp extends React.Component {
         super();
 
         this.addTodo = this.addTodo.bind(this);
+        this.editTodo = this.editTodo.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.addStep = this.addStep.bind(this);
-        this.setStep = this.setStep.bind(this);
         this.removeStep = this.removeStep.bind(this);
         this.editStep = this.editStep.bind(this);
 
@@ -58,6 +58,15 @@ class TodoApp extends React.Component {
         // Update state
         this.setState({todos});
     }
+
+    editTodo(val, key) {
+        const todos = {...this.state.todos};
+
+        todos[key].text = val;
+
+        this.setState({todos});
+    }
+
     // Handle remove
     handleRemove(key) {
         const todos = {...this.state.todos};
@@ -69,6 +78,8 @@ class TodoApp extends React.Component {
         const todos = {...this.state.todos};
         const steps = todos[key].steps;
         const timestamp = Date.now();
+
+        console.log("addstep");
 
         //set step
         steps[`step-${timestamp}`] = {
@@ -95,26 +106,19 @@ class TodoApp extends React.Component {
         this.setState({todos});
     }
 
-    setStep(todoKey, stepKey, editable){
-        // copy todos state
-        const todos = {...this.state.todos};
-        todos[todoKey].steps[stepKey].edit = editable;
-
-        // Update state
-        this.setState({todos});
-    }
-
     render() {
         // Render JSX
         return (
-            <div>
-                <Title/>
-                <TodoForm addTodo={this.addTodo}/>
+            <div className="breakdown-container">
+                <header className="breakdown-header">
+                    <Title/>
+                    <TodoForm addTodo={this.addTodo}/>
+                </header>
                 <TodoList
                     todos={this.state.todos}
                     remove={this.handleRemove}
-                    setStep={this.setStep}
                     addStep={this.addStep}
+                    editTodo={this.editTodo}
                     removeStep={this.removeStep}
                     editStep={this.editStep}
                     />

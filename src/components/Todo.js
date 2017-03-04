@@ -1,7 +1,7 @@
 import React from "react";
 import StepList from "./StepList";
 
-const Todo = ({todo, index, remove, addStep, setStep, removeStep, editStep}) => {
+const Todo = ({todo, index, remove, addStep, editTodo, removeStep, editStep}) => {
 
     function removeTodo(id) {
         remove(id);
@@ -11,8 +11,8 @@ const Todo = ({todo, index, remove, addStep, setStep, removeStep, editStep}) => 
     return (
         <li className="todo-item">
             <div className="todo-info">
-                {todo.text}
-                <div>
+                <input type="text" value={todo.text} onChange={(event) =>editTodo(event.target.value, index)}/>
+                <div className="todo-action-buttons">
                     <button onClick={() => addStep(index)}>Breakdown</button>
                     <button  onClick={() => removeTodo(index)}>&times;</button>
                 </div>
@@ -20,7 +20,6 @@ const Todo = ({todo, index, remove, addStep, setStep, removeStep, editStep}) => 
             <StepList
                 steps={todo.steps}
                 todoKey={index}
-                setStep={setStep}
                 removeStep={removeStep}
                 addStep={addStep}
                 editStep={editStep}
