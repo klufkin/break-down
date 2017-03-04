@@ -116,6 +116,7 @@ class TodoApp extends React.Component {
                 </header>
                 <TodoList
                     todos={this.state.todos}
+                    addTodo={this.addTodo}
                     remove={this.handleRemove}
                     addStep={this.addStep}
                     editTodo={this.editTodo}

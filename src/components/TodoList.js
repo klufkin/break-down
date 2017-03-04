@@ -1,7 +1,7 @@
 import React from "react";
 import Todo from "./Todo";
 
-const TodoList = ({todos, remove, addStep, editTodo, removeStep, editStep}) => {
+const TodoList = ({todos, remove, addTodo, addStep, editTodo, removeStep, editStep}) => {
     return (
         <ul className="todo-list">
             {Object.keys(todos).map( key =>
@@ -9,6 +9,7 @@ const TodoList = ({todos, remove, addStep, editTodo, removeStep, editStep}) => {
                     todo={todos[key]}
                     key={key}
                     index={key}
+                    addTodo={addTodo}
                     remove={remove}
                     editTodo={editTodo}
                     addStep={addStep}

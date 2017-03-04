@@ -4,14 +4,16 @@
     padding: 0;
 }
 
+body, ul, li, input {
+    color: #e8eaf6;
+}
+
 
 .breakdown-container {
     width: 90%;
     max-width: 420px;
     margin: 20px auto;
-    padding: 30px;
     box-shadow: 0px 7px 13px 4px rgba(0,0,0,.22);
-    color: #e8eaf6;
     background-color: #232733;
 }
 
@@ -19,6 +21,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
+    padding: 0 15px;
+    background-color: #141720;
 }
 
 .breakdown-logo {
@@ -26,17 +31,53 @@
     align-items: center;
 }
 
+.add-step-button {
+    height: 30px;
+    width: 30px;
+    border: 0;
+    background-color: #73d9ff;
+    border-radius: 4px;
+    line-height: 30px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.step-bullet {
+    max-height: 6px;
+    height: 8px;
+    width: 8px;
+    min-width: 6px;
+    margin: 20px;
+    border-radius: 50%;
+    background-color: #232733;
+}
+
+.step-list .step-bullet {
+    background-color: #141720;
+}
+
+.step-num-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    min-width: 26px;
+    width: 26px;
+    margin: 20px;
+    border: 2px solid #232733;
+    border-radius: 4px;
+}
+
 .todo-list input {
     border: none;
     outline: none;
     background: none;
     width: 100%;
-    color: #fff;
     font-size: 14px;
 }
 
 .todo-list ::-webkit-input-placeholder{
-    color: #000;
     opacity: .2;
 }
 
@@ -46,10 +87,12 @@
 
 .todo-info {
     display: flex;
-    padding: 12px;
+    -ms-align-items: center;
+    align-items: center;
+    height: 48px;
     margin-bottom: 2px;
     justify-content: space-between;
-    background-color: #408bff;
+    background-color: #3b4254;
     text-align: left;
 }
 
@@ -60,13 +103,12 @@
 .step-list {
     padding: 0;
     margin-left: 20px;
-    color: #fff;
     text-align: left;
 }
 
 .step-list li {
-    padding: 12px;
-    background: #08bf6e;
+    height: 48px;
+    background: #2f3545;
     margin-bottom: 2px;
 }
 
