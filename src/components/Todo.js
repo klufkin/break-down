@@ -1,6 +1,7 @@
 import React from "react";
 import StepContent from "./StepContent";
 import StepList from "./StepList";
+import CSSTransitionGroup from "react-addons-css-transition-group";
 
 class Todo extends React.Component {
     constructor(props) {
@@ -9,7 +10,6 @@ class Todo extends React.Component {
         this.loseFocus = this.loseFocus.bind(this);
         this.updateSelection = this.updateSelection.bind(this);
         this.breakdownStep = this.breakdownStep.bind(this);
-        this.renderSubSteps = this.renderSubSteps.bind(this);
         this.renderStepCount = this.renderStepCount.bind(this);
 
         this.state = {
@@ -37,30 +37,17 @@ class Todo extends React.Component {
     }
 
     loseFocus(event, key){
-        console.log(event);
         // If value does not exist remove step.
         if(!event.target.value)
             this.props.remove(key);
     }
 
-    renderSubSteps(){
-        if(this.state.stepSelected){
-            return (
-                <StepList
-                    steps={this.props.todo.steps}
-                    todoKey={this.props.index}
-                    removeStep={this.props.removeStep}
-                    addStep={this.props.addStep}
-                    editStep={this.props.editStep}
-                />
-            );
-        }
-    }
-
+    // display the number of sub steps
     renderStepCount() {
         const steps = this.props.todo.steps;
-
         let numSteps = 0;
+        let selectedClass = this.state.stepSelected ? "step-num-count selected" : "step-num-count";
+
         // count number of steps from object
         for(let key in steps) {
             if (steps.hasOwnProperty(key)) {
@@ -71,7 +58,7 @@ class Todo extends React.Component {
         // render count if substeps exist
         if(numSteps) {
             return (
-                <div className="step-num-count">{numSteps}</div>
+                <div className={selectedClass}>{numSteps}</div>
             );
         } else {
             return ( <div className="step-bullet"></div> );
@@ -80,6 +67,16 @@ class Todo extends React.Component {
 
 
     render() {
+        // If selected render sub steps
+        let subSteps = !this.state.stepSelected ? "" : (
+            <StepList
+                steps={this.props.todo.steps}
+                todoKey={this.props.index}
+                removeStep={this.props.removeStep}
+                addStep={this.props.addStep}
+                editStep={this.props.editStep}
+            />);
+
         // Each Todo - note - always remember to bind, functions, so they fire in the appropriate context.
         return (
             <li className="todo-item">
@@ -95,11 +92,11 @@ class Todo extends React.Component {
                     />
 
                     <div className="todo-action-buttons">
-                        <button onClick={(event) => this.breakdownStep(event)}>Breakdown</button>
-                        <button  onClick={() => this.props.remove(this.props.index)}>&times;</button>
+                        <button className="remove-step-btn" onClick={() => this.props.remove(this.props.index)}>&times;</button>
+                        <button className="create-sub-step-btn" onClick={(event) => this.breakdownStep(event)}>+</button>
                     </div>
                 </div>
-                {this.renderSubSteps()}
+                {subSteps}
             </li>
         );
     }

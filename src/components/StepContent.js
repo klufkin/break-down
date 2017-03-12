@@ -26,7 +26,8 @@ const StepContent = ({todo, index, editTodo, addTodo, removeStep}) => {
             <textarea autoFocus spellCheck="false" value={todo.text}
                 onChange={(event) => editTodo(event.target.value, index)}
                 onBlur={(event) => loseFocus(event, index)}
-                onKeyDown={(event) => hitEnter(event)}>
+                onKeyDown={(event) => hitEnter(event)}
+                onClick={(event) => {event.stopPropagation();}}
             >
             </textarea>
         </div>

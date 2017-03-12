@@ -9,26 +9,56 @@
     border: 0;
 }
 
+body {
+    background-color: #e8eaf6;
+    font-weight: 300;
+}
+
 body, ul, li, input {
     color: #e8eaf6;
+}
+
+.breakdown-logo > h1 {
+    line-height: 24px;
+}
+
+.breakdown-logo img {
+    height: 30px;
+    margin-right: 20px;
+}
+
+.break {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+
+.down {
+    font-size: 15px;
+    font-weight: 400;
+    color: #596c7a;
+    letter-spacing: .5px;
 }
 
 
 .breakdown-container {
     width: 90%;
     max-width: 420px;
-    margin: 20px auto;
-    box-shadow: 0px 7px 13px 4px rgba(0,0,0,.22);
-    background-color: #232733;
+    margin: 8vh auto;
+    background-color: #141720;
+    padding-bottom: 100px;
+    background: linear-gradient(to bottom, #141720 90%, #d3d5e1 96%, #e8eaf6);
 }
 
 .breakdown-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 64px;
     padding: 0 15px;
     background-color: #141720;
+    border-bottom: 2px solid #f75d90;
 }
 
 .breakdown-logo {
@@ -42,16 +72,17 @@ body, ul, li, input {
     border: 0;
     background-color: #73d9ff;
     border-radius: 4px;
-    line-height: 30px;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 4px;
     color: #fff;
     cursor: pointer;
+    box-shadow: 0px 2px 10px 3px rgba(115, 217, 255, 0.25);
 }
 
 .step-bullet {
     max-height: 6px;
     height: 8px;
-    width: 8px;
     min-width: 6px;
     margin: 20px;
     border-radius: 50%;
@@ -69,9 +100,17 @@ body, ul, li, input {
     height: 26px;
     min-width: 26px;
     width: 26px;
-    margin: 20px;
-    border: 2px solid #232733;
-    border-radius: 4px;
+    margin: 10px;
+    border: 2px solid #2f3545;
+    border-radius: 2px;
+}
+
+.step-num-count.selected {
+    background-color: #232733;
+}
+
+.todo-list {
+    box-shadow: 0px -3px 5px -1px #f75d90;
 }
 
 .todo-list input {
@@ -90,11 +129,22 @@ body, ul, li, input {
     list-style-type: none;
 }
 
+.todo-info:hover .step-bullet, .todo-step:hover .step-bullet {
+    background-color: #f75d90;
+    box-shadow: 0px 0px 3px 1px #f75d90;
+}
+
+.todo-info:hover .step-num-count {
+    color: #f75d90;
+    text-shadow: 0px 0px 3px #f75d90;
+
+}
+
 .todo-info {
     display: flex;
     -ms-align-items: center;
     align-items: center;
-    min-height: 48px;
+    min-height: 58px;
     margin-bottom: 2px;
     justify-content: space-between;
     background-color: #3b4254;
@@ -103,12 +153,45 @@ body, ul, li, input {
 
 .todo-action-buttons {
     display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    align-self: flex-start;
+    -ms-align-items: flex-end;
+    align-items: flex-end;
+    margin-right: 5px;
+}
+
+.remove-step-btn {
+    height: 20px;
+    width: 20px;
+    background: rgba(0,0,0,0);
+    color: #232733;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.create-sub-step-btn {
+    height: 20px;
+    width: 20px;
+    margin-top: 5px;
+    background: #2f3545;
+    border-radius: 2px;
+    padding-bottom: 2px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #e8eaf6;
+    cursor: pointer;
 }
 
 .step-list {
     padding: 0;
-    margin-left: 20px;
     text-align: left;
+    transform: translateX(26px);
 }
 
 .step-list li {
@@ -121,6 +204,37 @@ body, ul, li, input {
     justify-content: space-between;
     -ms-align-items: center;
     align-items: center;
+    min-height: 58px;
+}
+
+.remove-sub-step-btn {
+    height: 20px;
+    width: 20px;
+    background: rgba(0,0,0,0);
+    font-size: 20px;
+    align-self: flex-start;
+    margin-right: 5px;
+    color: #141720;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.first-step-text {
+    font-weight: 300;
+    padding: 20px 0 10px;
+}
+
+.first-step-btn {
+    background-color: #73d9ff;
+    color: #fff;
+    height: 32px;
+    width: 130px;
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 4px;
+    border-radius: 17px;
+    box-shadow: 0px 2px 10px 3px rgba(115, 217, 255, 0.25);
+    cursor: pointer;
 }
 
 /* ------------- Text Area Multiline Hack ---------------- */
@@ -162,10 +276,61 @@ body, ul, li, input {
   color: #e8eaf6;
   background: rgba(59, 66, 84, 0);
   font-size: 14px;
+  font-weight: 300;
 }
 
 .expandingTextArea > .dummy-container {
     display: block;
     /* Hide the text; just using it for sizing */
     visibility: hidden;
+}
+
+/* -------------Animation Styling ---------------- */
+
+.todo-enter {
+    transition: all 0.2s ease-in;
+    transform: translateX(-20%);
+	max-height: 0;
+    opacity: 0;
+}
+.todo-enter-active {
+    transform: translateX(0%);
+	max-height: 58px;
+    opacity: 1;
+}
+
+.todo-leave {
+    transition: all 0.2s ease-out;
+    max-height: 58px;
+    opacity: 1;
+}
+.todo-leave-active {
+    max-height: 0;
+    opacity: 0;
+}
+
+.substep-enter {
+    transition: all 0.2s ease-in;
+	max-height: 0;
+    opacity: 0;
+    transform: translateY(150%);
+}
+
+.substep-enter-active {
+	max-height: 58px;
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.substep-leave {
+    transition: all 0.2s ease-out;
+    max-height: 58px;
+    opacity: 1;
+    transform: translateX(0%);
+}
+.substep-leave-active {
+    max-height: 0;
+    opacity: 0;
+    transform: translateX(20%);
+
 }

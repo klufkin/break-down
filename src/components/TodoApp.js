@@ -79,8 +79,6 @@ class TodoApp extends React.Component {
         const steps = todos[key].steps;
         const timestamp = Date.now();
 
-        console.log("addstep");
-
         //set step
         steps[`step-${timestamp}`] = {
             text: "",
@@ -107,12 +105,27 @@ class TodoApp extends React.Component {
     }
 
     render() {
+        // count steps for empty and non empty state
+        let numSteps = 0;
+        // count number of steps from object
+        for(let key in this.state.todos) {
+            if (this.state.todos.hasOwnProperty(key)) {
+                numSteps++;
+            }
+        }
+
         // Render JSX
         return (
+
+
+
             <div className="breakdown-container">
                 <header className="breakdown-header">
                     <Title/>
-                    <TodoForm addTodo={this.addTodo}/>
+                    <TodoForm
+                        addTodo={this.addTodo}
+                        numSteps={numSteps}
+                        />
                 </header>
                 <TodoList
                     todos={this.state.todos}
@@ -122,6 +135,7 @@ class TodoApp extends React.Component {
                     editTodo={this.editTodo}
                     removeStep={this.removeStep}
                     editStep={this.editStep}
+                    numSteps={numSteps}
                     />
             </div>
         );

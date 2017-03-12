@@ -1,12 +1,16 @@
 import React from "react";
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = ({addTodo, numSteps}) => {
 
-    return (
-            <button type="submit" className="add-step-button" onClick={() => addTodo("")}>
-                +
-            </button>
-    );
+    if(numSteps){
+        return (
+                <button type="submit" className="add-step-button" onClick={() => addTodo("")}>
+                    +
+                </button>
+        );
+    } else {
+        return <span></span>;
+    }
 };
 
 export default TodoForm;
