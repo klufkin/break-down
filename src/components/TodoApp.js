@@ -116,9 +116,6 @@ class TodoApp extends React.Component {
 
         // Render JSX
         return (
-
-
-
             <div className="breakdown-container">
                 <header className="breakdown-header">
                     <Title/>

@@ -1,13 +1,10 @@
 import React from "react";
 import StepContent from "./StepContent";
 import StepList from "./StepList";
-import CSSTransitionGroup from "react-addons-css-transition-group";
 
 class Todo extends React.Component {
     constructor(props) {
         super(props);
-        this.hitEnter = this.hitEnter.bind(this);
-        this.loseFocus = this.loseFocus.bind(this);
         this.updateSelection = this.updateSelection.bind(this);
         this.breakdownStep = this.breakdownStep.bind(this);
         this.renderStepCount = this.renderStepCount.bind(this);
@@ -29,17 +26,6 @@ class Todo extends React.Component {
         this.setState({stepSelected: true});
 
         this.props.addStep(this.props.index)
-    }
-
-    hitEnter(event){
-        if(event.keyCode === 13)
-            this.props.addTodo("");
-    }
-
-    loseFocus(event, key){
-        // If value does not exist remove step.
-        if(!event.target.value)
-            this.props.remove(key);
     }
 
     // display the number of sub steps
@@ -88,7 +74,10 @@ class Todo extends React.Component {
                         index={this.props.index}
                         editTodo={this.props.editTodo}
                         addTodo={this.props.addTodo}
+                        addSubStep={this.props.addStep}
                         removeStep={this.props.remove}
+                        stepSelected={this.state.stepSelected}
+                        updateSelection={this.updateSelection}
                     />
 
                     <div className="todo-action-buttons">

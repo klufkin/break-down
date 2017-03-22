@@ -1,10 +1,19 @@
 import React from "react";
 
-const StepContent = ({todo, index, editTodo, addTodo, removeStep}) => {
+const StepContent = ({todo, index, editTodo, addTodo, addSubStep, removeStep, stepSelected, updateSelection}) => {
     // prevents onchange from firing and displaying \n, need to use onKeydown event as onKeyUp fires after change
     // aslo creates a new todo step
     function hitEnter(event) {
-        if (event.keyCode === 13) {
+        // when shift key is held and user hits enter - create a substep!
+        if (event.shiftKey && event.keyCode === 13){
+            event.preventDefault();
+            addSubStep(index);
+            // if step is not selected display sub step list
+            if(!stepSelected){
+                updateSelection();
+            }
+        }
+        else if (event.keyCode === 13) {
             event.preventDefault();
             addTodo("");
         }

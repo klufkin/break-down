@@ -285,6 +285,59 @@ body, ul, li, input {
     visibility: hidden;
 }
 
+/* -------------About Component ---------------- */
+
+
+.about-link {
+    display: block;
+    margin: 10px 10px 0 0;
+    color: #596c7a;
+    text-decoration: none;
+    font-size: .8em;
+    text-align: right;
+}
+
+.about-info {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 300;
+    flex-direction: column;
+    align-items: center;
+    color: #232733;
+    background: #e8eaf6;
+}
+
+.about-info a {
+    color: #596c7a;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.about-info .about-back {
+    display: block;
+    margin: 10px 10px 0 0;
+    font-size: .8em;
+    align-self: flex-end;
+}
+
+.about-text {
+    max-width: 540px;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.618em;
+    font-weight: 400;
+    margin: 20vh 0 5vh;
+}
+
+.about-dancer {
+    font-size: 1.5em;
+}
+
 /* -------------Animation Styling ---------------- */
 
 .todo-enter {
