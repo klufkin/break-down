@@ -1,7 +1,8 @@
 {
-  "name": "react-todo",
+  "name": "react-breakdown",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/klufkin/break-down/",
   "devDependencies": {
     "react-scripts": "0.9.0"
   },
