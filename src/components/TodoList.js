@@ -13,11 +13,11 @@ const TodoList = ({todos, remove, addTodo, addStep, editTodo, removeStep, editSt
 			 transitionEnterTimeout={200}
 			 transitionLeaveTimeout={200}
 			 >
-                {Object.keys(todos).map( key =>
+                {todos.map( (todo, index) =>
                     <Todo
-                        todo={todos[key]}
-                        key={key}
-                        index={key}
+                        todo={todo}
+                        key={index}
+                        index={index}
                         addTodo={addTodo}
                         remove={remove}
                         editTodo={editTodo}

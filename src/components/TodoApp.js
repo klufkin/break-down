@@ -2,6 +2,8 @@ import React from "react";
 import Title from "./Title";
 import TodoForm from './TodoForm';
 import TodoList from "./TodoList";
+import { DragDropContext } from 'react-dnd'; // package required for drag and drop
+import HTML5Backend from 'react-dnd-html5-backend'; // backend for drag and drop
 import "../css/TodoApp.css";
 
 // Contaner Component
@@ -19,19 +21,20 @@ class TodoApp extends React.Component {
 
         // Set initial state
         this.state = {
-            todos: {}
+            todos: []
         }
     }
 
     // Runs right before the moment of rendering onto the page (only runs once)
     componentWillMount() {
-        // check if there is any order in local storage
+        // check if there is any todos in local storage
         const localStorageRef = localStorage.getItem(`todos`);
 
         if(localStorageRef){
+            const todos = JSON.parse(localStorageRef);
             // update our App component order state
             this.setState({
-                todos: JSON.parse(localStorageRef)
+                todos: Object.keys(todos).map(key => todos[key]) // Parses object into array format
             })
         }
     }
@@ -45,22 +48,22 @@ class TodoApp extends React.Component {
 
     // Add todo handler
     addTodo(val) {
-        const todos = {...this.state.todos};
-
+        const todos = [...this.state.todos];
         const timestamp = Date.now();
 
         // Update todos
-        todos[`todo-${timestamp}`] = {
+        todos.push({
             text: val,
-            steps: {}
-        };
+            steps: {},
+            id: timestamp
+        });
 
         // Update state
         this.setState({todos});
     }
 
     editTodo(val, key) {
-        const todos = {...this.state.todos};
+        const todos = [...this.state.todos];
 
         todos[key].text = val;
 
@@ -69,13 +72,13 @@ class TodoApp extends React.Component {
 
     // Handle remove
     handleRemove(key) {
-        const todos = {...this.state.todos};
-        delete todos[key];
+        const todos = [...this.state.todos];
+        todos.splice(key, 1);
         this.setState({todos});
     }
 
     addStep(key){
-        const todos = {...this.state.todos};
+        const todos = [...this.state.todos];
         const steps = todos[key].steps;
         const timestamp = Date.now();
 
@@ -91,7 +94,7 @@ class TodoApp extends React.Component {
 
     editStep(todoKey, stepKey, value){
         // copy todos state
-        const todos = {...this.state.todos};
+        const todos = [...this.state.todos];
         // update value
         todos[todoKey].steps[stepKey].text = value;
         // Update state
@@ -99,20 +102,14 @@ class TodoApp extends React.Component {
     }
 
     removeStep(todoKey, stepKey) {
-        const todos = {...this.state.todos};
+        const todos = [...this.state.todos];
         delete todos[todoKey].steps[stepKey];
         this.setState({todos});
     }
 
     render() {
         // count steps for empty and non empty state
-        let numSteps = 0;
-        // count number of steps from object
-        for(let key in this.state.todos) {
-            if (this.state.todos.hasOwnProperty(key)) {
-                numSteps++;
-            }
-        }
+        let numSteps = this.state.todos.length;
 
         // Render JSX
         return (
@@ -139,4 +136,5 @@ class TodoApp extends React.Component {
     }
 }
 
-export default TodoApp;
+// indicates the backend we wish to use and the component we want to use as the context
+export default DragDropContext(HTML5Backend)(TodoApp);
