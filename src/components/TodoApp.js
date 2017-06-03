@@ -54,7 +54,7 @@ class TodoApp extends React.Component {
         // Update todos
         todos.push({
             text: val,
-            steps: {},
+            steps: [],
             id: timestamp
         });
 
@@ -79,14 +79,14 @@ class TodoApp extends React.Component {
 
     addStep(key){
         const todos = [...this.state.todos];
-        const steps = todos[key].steps;
-        const timestamp = Date.now();
 
         //set step
-        steps[`step-${timestamp}`] = {
+        const step = {
+            id: Date.now(), // setting a timestamp for id
             text: "",
-            edit: true
         }
+
+        todos[key].steps.push(step);
 
         // Update state
         this.setState({todos});
@@ -95,15 +95,18 @@ class TodoApp extends React.Component {
     editStep(todoKey, stepKey, value){
         // copy todos state
         const todos = [...this.state.todos];
-        // update value
+        // edit sub step
         todos[todoKey].steps[stepKey].text = value;
         // Update state
         this.setState({todos});
     }
 
     removeStep(todoKey, stepKey) {
+        // copy todos state
         const todos = [...this.state.todos];
-        delete todos[todoKey].steps[stepKey];
+        // remove sub step
+        todos[todoKey].steps.splice(stepKey, 1);
+        // update state
         this.setState({todos});
     }
 

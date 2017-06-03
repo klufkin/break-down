@@ -8,10 +8,12 @@ const SubStep = ({
     addStep,
     editStep
 }) => {
-    function handleChange(event, stepKey) {
-        editStep(todoKey, stepKey, event.target.value);
+
+    function handleChange(event) {
+        editStep(todoKey, index, event.target.value);
     }
 
+    // If user hits enter add a substep
     function hitEnter(event) {
         if (event.keyCode === 13) {
             event.preventDefault();
@@ -19,13 +21,13 @@ const SubStep = ({
         }
     }
 
-    function loseFocus(event, key) {
+    function loseFocus(event) {
         // If value does not exist remove step.
-        if (!event.target.value)
-            removeStep(todoKey, key);
+        if (!event.target.value) removeStep(todoKey, index);
     }
+
     return (
-        <li key={index} className="todo-step">
+        <li className="todo-step">
             <div className="step-bullet"></div>
 
             <div className="expandingTextArea">
@@ -35,8 +37,8 @@ const SubStep = ({
                     </span><br/>
                 </div>
                 <textarea autoFocus spellCheck="false" value={stepValue}
-                    onChange={(event) => handleChange(event, index)}
-                    onBlur={(event) => loseFocus(event, index)}
+                    onChange={(event) => handleChange(event)}
+                    onBlur={(event) => loseFocus(event)}
                     onKeyDown={(event) => hitEnter(event)}>
                 >
                 </textarea>

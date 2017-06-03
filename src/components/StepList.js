@@ -12,18 +12,15 @@ const StepList = ({steps, todoKey, removeStep, addStep, editStep}) => {
 			 transitionEnterTimeout={200}
 			 transitionLeaveTimeout={200}
 			 >
-                {Object
-                    .keys(steps)
-                    .map((key) =>
+                {steps.map((step, index) =>
                     <SubStep
-                        key={key}
-                        index={key}
-                        stepValue={steps[key].text}
+                        key={step.id}
+                        index={index}
+                        stepValue={step.text}
                         todoKey={todoKey}
                         addStep={addStep}
                         editStep={editStep}
-                        removeStep={removeStep}
-                    />
+                        removeStep={removeStep}/>
                     )
                 }
             </CSSTransitionGroup>

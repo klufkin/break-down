@@ -5,9 +5,11 @@ import StepList from "./StepList";
 class Todo extends React.Component {
     constructor(props) {
         super(props);
+
         this.updateSelection = this.updateSelection.bind(this);
         this.breakdownStep = this.breakdownStep.bind(this);
         this.renderStepCount = this.renderStepCount.bind(this);
+
         this.state = {
             stepSelected: false
         }
