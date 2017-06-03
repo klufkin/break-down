@@ -1,9 +1,9 @@
 import React from "react";
 import Title from "./Title";
-import TodoForm from './TodoForm';
+import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import { DragDropContext } from 'react-dnd'; // package required for drag and drop
-import HTML5Backend from 'react-dnd-html5-backend'; // backend for drag and drop
+import { DragDropContext } from "react-dnd"; // package required for drag and drop
+import HTML5Backend from "react-dnd-html5-backend"; // backend for drag and drop
 import "../css/TodoApp.css";
 
 // Contaner Component
@@ -22,7 +22,7 @@ class TodoApp extends React.Component {
         // Set initial state
         this.state = {
             todos: []
-        }
+        };
     }
 
     // Runs right before the moment of rendering onto the page (only runs once)
@@ -30,21 +30,20 @@ class TodoApp extends React.Component {
         // check if there is any todos in local storage
         const localStorageRef = localStorage.getItem(`todos`);
 
-        if(localStorageRef){
+        if (localStorageRef) {
             const todos = JSON.parse(localStorageRef);
             // update our App component order state
             this.setState({
                 todos: Object.keys(todos).map(key => todos[key]) // Parses object into array format
-            })
+            });
         }
     }
 
     // // runs whenever props or state updates
-	// // updated props and state passed in
-	componentWillUpdate (nextProps, nextState) {
-		localStorage.setItem(`todos`,
-			JSON.stringify(nextState.todos));
-	}
+    // // updated props and state passed in
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem(`todos`, JSON.stringify(nextState.todos));
+    }
 
     // Add todo handler
     addTodo(val) {
@@ -59,7 +58,7 @@ class TodoApp extends React.Component {
         });
 
         // Update state
-        this.setState({todos});
+        this.setState({ todos });
     }
 
     editTodo(val, key) {
@@ -67,38 +66,38 @@ class TodoApp extends React.Component {
 
         todos[key].text = val;
 
-        this.setState({todos});
+        this.setState({ todos });
     }
 
     // Handle remove
     handleRemove(key) {
         const todos = [...this.state.todos];
         todos.splice(key, 1);
-        this.setState({todos});
+        this.setState({ todos });
     }
 
-    addStep(key){
+    addStep(key) {
         const todos = [...this.state.todos];
 
         //set step
         const step = {
             id: Date.now(), // setting a timestamp for id
-            text: "",
-        }
+            text: ""
+        };
 
         todos[key].steps.push(step);
 
         // Update state
-        this.setState({todos});
+        this.setState({ todos });
     }
 
-    editStep(todoKey, stepKey, value){
+    editStep(todoKey, stepKey, value) {
         // copy todos state
         const todos = [...this.state.todos];
         // edit sub step
         todos[todoKey].steps[stepKey].text = value;
         // Update state
-        this.setState({todos});
+        this.setState({ todos });
     }
 
     removeStep(todoKey, stepKey) {
@@ -107,7 +106,7 @@ class TodoApp extends React.Component {
         // remove sub step
         todos[todoKey].steps.splice(stepKey, 1);
         // update state
-        this.setState({todos});
+        this.setState({ todos });
     }
 
     render() {
@@ -118,11 +117,8 @@ class TodoApp extends React.Component {
         return (
             <div className="breakdown-container">
                 <header className="breakdown-header">
-                    <Title/>
-                    <TodoForm
-                        addTodo={this.addTodo}
-                        numSteps={numSteps}
-                        />
+                    <Title />
+                    <TodoForm addTodo={this.addTodo} numSteps={numSteps} />
                 </header>
                 <TodoList
                     todos={this.state.todos}
@@ -133,7 +129,7 @@ class TodoApp extends React.Component {
                     removeStep={this.removeStep}
                     editStep={this.editStep}
                     numSteps={numSteps}
-                    />
+                />
             </div>
         );
     }

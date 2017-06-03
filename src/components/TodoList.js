@@ -2,18 +2,25 @@ import React from "react";
 import Todo from "./Todo";
 import CSSTransitionGroup from "react-addons-css-transition-group";
 
-
-const TodoList = ({todos, remove, addTodo, addStep, editTodo, removeStep, editStep, numSteps}) => {
-    if(numSteps){
+const TodoList = ({
+    todos,
+    remove,
+    addTodo,
+    addStep,
+    editTodo,
+    removeStep,
+    editStep,
+    numSteps
+}) => {
+    if (numSteps) {
         return (
             <CSSTransitionGroup
-			 className="todo-list"
-			 component="ul"
-			 transitionName="todo"
-			 transitionEnterTimeout={200}
-			 transitionLeaveTimeout={200}
-			 >
-                {todos.map( (todo, index) =>
+                className="todo-list"
+                component="ul"
+                transitionName="todo"
+                transitionEnterTimeout={200}
+                transitionLeaveTimeout={200}>
+                {todos.map((todo, index) =>
                     <Todo
                         todo={todo}
                         key={index}
@@ -28,17 +35,20 @@ const TodoList = ({todos, remove, addTodo, addStep, editTodo, removeStep, editSt
                 )}
             </CSSTransitionGroup>
         );
-    }
-    else {
+    } else {
         return (
             <ul className="todo-list">
                 <div className="first-step">
                     <h3 className="first-step-text">Create First Step</h3>
-                    <button className="first-step-btn" onClick={() => addTodo("")}>+</button>
+                    <button
+                        className="first-step-btn"
+                        onClick={() => addTodo("")}>
+                        +
+                    </button>
                 </div>
             </ul>
-        )
+        );
     }
-}
+};
 
 export default TodoList;

@@ -8,7 +8,6 @@ const SubStep = ({
     addStep,
     editStep
 }) => {
-
     function handleChange(event) {
         editStep(todoKey, index, event.target.value);
     }
@@ -28,25 +27,32 @@ const SubStep = ({
 
     return (
         <li className="todo-step">
-            <div className="step-bullet"></div>
+            <div className="step-bullet" />
 
             <div className="expandingTextArea">
                 <div className="dummy-container">
                     <span>
                         {stepValue}
-                    </span><br/>
+                    </span>
+                    <br />
                 </div>
-                <textarea autoFocus spellCheck="false" value={stepValue}
-                    onChange={(event) => handleChange(event)}
-                    onBlur={(event) => loseFocus(event)}
-                    onKeyDown={(event) => hitEnter(event)}>
-                >
-                </textarea>
+                <textarea
+                    autoFocus
+                    spellCheck="false"
+                    value={stepValue}
+                    onChange={event => handleChange(event)}
+                    onBlur={event => loseFocus(event)}
+                    onKeyDown={event => hitEnter(event)}
+                />
             </div>
 
-            <button className="remove-sub-step-btn"  onClick={() => removeStep(todoKey, index)}>&times;</button>
+            <button
+                className="remove-sub-step-btn"
+                onClick={() => removeStep(todoKey, index)}>
+                &times;
+            </button>
         </li>
     );
-}
+};
 
 export default SubStep;
