@@ -21,6 +21,7 @@ class TodoApp extends React.Component {
     this.addStep = this.addStep.bind(this);
     this.removeStep = this.removeStep.bind(this);
     this.editStep = this.editStep.bind(this);
+    this.moveTodo = this.moveTodo.bind(this);
 
     // Set initial state
     this.state = {
@@ -79,6 +80,18 @@ class TodoApp extends React.Component {
     this.setState({ todos });
   }
 
+  moveTodo(id, hoverIndex) {
+    const todos = [...this.state.todos];
+    const dragTodo = todos.filter(todo => todo.id === id)[0]; // grabs by id so as not to shift back and forth once move occurs
+    const dragIndex = todos.indexOf(dragTodo);
+
+    // update list - set new position / remove from old position
+    todos.splice(dragIndex, 1); // need to remove first as can't have two items of same key(id)
+    todos.splice(hoverIndex, 0, dragTodo);
+    // set state
+    this.setState({ todos });
+  }
+
   addStep(key) {
     const todos = [...this.state.todos];
 
@@ -126,6 +139,7 @@ class TodoApp extends React.Component {
         <TodoList
           todos={this.state.todos}
           addTodo={this.addTodo}
+          moveTodo={this.moveTodo}
           remove={this.handleRemove}
           addStep={this.addStep}
           editTodo={this.editTodo}

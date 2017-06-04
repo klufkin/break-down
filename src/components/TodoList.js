@@ -2,7 +2,7 @@ import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Todo from './Todo';
 
-const TodoList = ({ todos, remove, addTodo, addStep, editTodo, removeStep, editStep, numSteps }) => {
+const TodoList = ({ todos, remove, addTodo, moveTodo, addStep, editTodo, removeStep, editStep, numSteps }) => {
   if (numSteps) {
     return (
       <CSSTransitionGroup
@@ -18,6 +18,7 @@ const TodoList = ({ todos, remove, addTodo, addStep, editTodo, removeStep, editS
             key={todo.id}
             index={index}
             addTodo={addTodo}
+            moveTodo={moveTodo}
             remove={remove}
             editTodo={editTodo}
             addStep={addStep}
