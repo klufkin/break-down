@@ -62,6 +62,7 @@ class Todo extends React.Component {
     this.updateSelection = this.updateSelection.bind(this);
     this.breakdownStep = this.breakdownStep.bind(this);
     this.renderStepCount = this.renderStepCount.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
 
     this.state = {
       stepSelected: false,
@@ -80,6 +81,12 @@ class Todo extends React.Component {
     this.setState({ stepSelected: true });
 
     this.props.addStep(this.props.index);
+  }
+
+  handleRemove(event) {
+    // prevent event from propagating up to container
+    event.stopPropagation();
+    this.props.remove(this.props.index);
   }
 
   // display the number of sub steps
@@ -108,6 +115,7 @@ class Todo extends React.Component {
         removeStep={this.props.removeStep}
         addStep={this.props.addStep}
         editStep={this.props.editStep}
+        moveStep={this.props.moveStep}
       />);
 
     // Each Todo - note - always remember to bind, functions, so they fire in the appropriate context.
@@ -129,7 +137,7 @@ class Todo extends React.Component {
             />
 
             <div className="todo-action-buttons">
-              <button className="remove-step-btn" onClick={() => this.props.remove(this.props.index)}>
+              <button className="remove-step-btn" onClick={event => this.handleRemove(event)}>
                 &times;
               </button>
               <button className="create-sub-step-btn" onClick={event => this.breakdownStep(event)}>
@@ -144,6 +152,10 @@ class Todo extends React.Component {
   }
 }
 
+// higher order components modifying BoardSquare to be a drop target.
+// Parameters (1) - will only react to items of said type produced by "dragsource" / "droptarget"
+// Parameters (2) - spec: describes how the "drag source" / "drop target" will react to drag and drop events
+// Parameters (3) - Provides props to hook up component to DnD back end and check state of drag/drop
 export default DragSource(ItemTypes.TODO, todoSource, sourceCollect)(
   DropTarget(ItemTypes.TODO, todoTarget, targetCollect)(Todo),
 );

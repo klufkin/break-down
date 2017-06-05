@@ -1,15 +1,15 @@
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('../../public/sourcesanspro-regular-webfont.woff2') format('woff2'),
-         url('../../public/sourcesanspro-regular-webfont.woff') format('woff');
+    src: url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
-    src: url('../../public/sourcesanspro-bold-webfont.woff2') format('woff2'),
-         url('../../public/sourcesanspro-bold-webfont.woff') format('woff');
+    src: url('../fonts/sourcesanspro-bold-webfont.woff2') format('woff2'),
+         url('../fonts/sourcesanspro-bold-webfont.woff') format('woff');
     font-weight: 700;
     font-style: bold;
 }
@@ -61,7 +61,7 @@ body, ul, li, input {
     margin: 8vh auto;
     background-color: #141720;
     padding-bottom: 100px;
-    background: linear-gradient(to bottom, #141720 90%, #d3d5e1 96%, #e8eaf6);
+    background: linear-gradient(to bottom, #141720 80%, rgba(20, 23, 32, 0) 100%);
 }
 
 .breakdown-header {
@@ -373,11 +373,11 @@ body, ul, li, input {
 .todo-leave {
     transition: all 0.2s ease-out;
     max-height: 58px;
-    opacity: 1;
+    opacity: 0;
 }
 .todo-leave-active {
     max-height: 0;
-    opacity: 0;
+    opacity: 1;
 }
 
 .substep-enter {

@@ -22,6 +22,7 @@ class TodoApp extends React.Component {
     this.removeStep = this.removeStep.bind(this);
     this.editStep = this.editStep.bind(this);
     this.moveTodo = this.moveTodo.bind(this);
+    this.moveStep = this.moveStep.bind(this);
 
     // Set initial state
     this.state = {
@@ -82,11 +83,12 @@ class TodoApp extends React.Component {
 
   moveTodo(id, hoverIndex) {
     const todos = [...this.state.todos];
-    const dragTodo = todos.filter(todo => todo.id === id)[0]; // grabs by id so as not to shift back and forth once move occurs
+    // grabs todo by id so as to prevent shift back and forth once move occurs
+    const dragTodo = todos.filter(todo => todo.id === id)[0];
     const dragIndex = todos.indexOf(dragTodo);
 
     // update list - set new position / remove from old position
-    todos.splice(dragIndex, 1); // need to remove first as can't have two items of same key(id)
+    todos.splice(dragIndex, 1);
     todos.splice(hoverIndex, 0, dragTodo);
     // set state
     this.setState({ todos });
@@ -125,6 +127,24 @@ class TodoApp extends React.Component {
     this.setState({ todos });
   }
 
+  moveStep(todoIndex, stepID, hoverIndex) {
+    const todos = [...this.state.todos];
+    const steps = todos[todoIndex].steps;
+    // grabs todo by id so as to prevent shift back and forth once move occurs
+    const dragStep = steps.filter(step => step.id === stepID)[0];
+    const dragIndex = steps.indexOf(dragStep);
+
+    // update substep list - set new position / remove from old position
+    steps.splice(dragIndex, 1);
+    steps.splice(hoverIndex, 0, dragStep);
+
+    // update todo object
+    todos[todoIndex].steps = steps;
+
+    // set state
+    this.setState({ todos });
+  }
+
   render() {
     // count steps for empty and non empty state
     const numSteps = this.state.todos.length;
@@ -144,6 +164,7 @@ class TodoApp extends React.Component {
           addStep={this.addStep}
           editTodo={this.editTodo}
           removeStep={this.removeStep}
+          moveStep={this.moveStep}
           editStep={this.editStep}
           numSteps={numSteps}
         />
