@@ -111,7 +111,8 @@ class Todo extends React.Component {
       ? null
       : (<StepList
         steps={this.props.todo.steps}
-        todoKey={this.props.index}
+        todoIndex={this.props.index}
+        todoID={this.props.todo.id}
         removeStep={this.props.removeStep}
         addStep={this.props.addStep}
         editStep={this.props.editStep}

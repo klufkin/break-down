@@ -9,6 +9,7 @@ const subStepSource = {
     return {
       id: props.id,
       index: props.index,
+      todoID: props.todoID,
     };
   },
   // prevent move form occurring if drop happens outside of list.
@@ -17,7 +18,7 @@ const subStepSource = {
     const didDrop = monitor.didDrop();
 
     if (!didDrop) {
-      props.moveStep(props.todoKey, droppedId, index);
+      props.moveStep(props.todoIndex, droppedId, index);
     }
   },
 };
@@ -35,11 +36,12 @@ function sourceCollect(connect, monitor) {
 
 const subStepTarget = {
   hover(props, monitor) {
-    const { id: dragID } = monitor.getItem();
-    const { id: hoverID, index: hoverIndex, todoKey: todoIndex } = props;
+    const { id: dragID, todoID: todoDragID } = monitor.getItem();
+    const { id: hoverID, index: hoverIndex, todoIndex, todoID: todoHoverID } = props;
 
-    // Don't replace items with themselves (don't use index as this changes as step moves)
-    if (dragID !== hoverID) {
+    // Don't replace items with themselves and only move within the same todo -
+    // (don't use index as this changes as step moves)
+    if (dragID !== hoverID && todoDragID === todoHoverID) {
       props.moveStep(todoIndex, dragID, hoverIndex);
     }
   },
@@ -56,7 +58,7 @@ const SubStep = ({
   index,
   id,
   stepValue,
-  todoKey,
+  todoIndex,
   removeStep,
   addStep,
   editStep,
@@ -66,20 +68,20 @@ const SubStep = ({
   connectDropTarget,
 }) => {
   function handleChange(event) {
-    editStep(todoKey, index, event.target.value);
+    editStep(todoIndex, index, event.target.value);
   }
 
   // If user hits enter add a substep
   function hitEnter(event) {
     if (event.keyCode === 13) {
       event.preventDefault();
-      addStep(todoKey);
+      addStep(todoIndex);
     }
   }
 
   function loseFocus(event) {
     // If value does not exist remove step.
-    if (!event.target.value) removeStep(todoKey, index);
+    if (!event.target.value) removeStep(todoIndex, index);
   }
 
   const opacity = isDragging ? 0 : 1;
@@ -106,7 +108,7 @@ const SubStep = ({
           />
         </div>
 
-        <button className="remove-sub-step-btn" onClick={() => removeStep(todoKey, index)}>
+        <button className="remove-sub-step-btn" onClick={() => removeStep(todoIndex, index)}>
           &times;
         </button>
       </li>,

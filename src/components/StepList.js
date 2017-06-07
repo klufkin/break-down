@@ -2,7 +2,7 @@ import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import SubStep from './SubStep';
 
-const StepList = ({ steps, todoKey, removeStep, addStep, editStep, moveStep }) =>
+const StepList = ({ steps, todoIndex, todoID, removeStep, addStep, editStep, moveStep }) =>
   (<CSSTransitionGroup
     className="step-list"
     component="ul"
@@ -16,7 +16,8 @@ const StepList = ({ steps, todoKey, removeStep, addStep, editStep, moveStep }) =
         id={step.id}
         index={index}
         stepValue={step.text}
-        todoKey={todoKey}
+        todoIndex={todoIndex}
+        todoID={todoID}
         addStep={addStep}
         editStep={editStep}
         removeStep={removeStep}
