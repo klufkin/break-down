@@ -373,11 +373,11 @@ body, ul, li, input {
 .todo-leave {
     transition: all 0.2s ease-out;
     max-height: 58px;
-    opacity: 0;
+    opacity: 1;
 }
 .todo-leave-active {
     max-height: 0;
-    opacity: 1;
+    opacity: 0;
 }
 
 .substep-enter {

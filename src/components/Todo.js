@@ -122,32 +122,34 @@ class Todo extends React.Component {
     // Each Todo - note - always remember to bind, functions, so they fire in the appropriate context.
     return connectDragSource(
       connectDropTarget(
-        <li className="todo-item" style={{ opacity }}>
-          <div className="todo-info" onClick={() => this.updateSelection()} role="button" tabIndex={0}>
-            {this.renderStepCount()}
+        <div>
+          <li className="todo-item" style={{ opacity }}>
+            <div className="todo-info" onClick={() => this.updateSelection()} role="button" tabIndex={0}>
+              {this.renderStepCount()}
 
-            <StepContent
-              todo={this.props.todo}
-              index={this.props.index}
-              editTodo={this.props.editTodo}
-              addTodo={this.props.addTodo}
-              addSubStep={this.props.addStep}
-              removeStep={this.props.remove}
-              stepSelected={this.state.stepSelected}
-              updateSelection={this.updateSelection}
-            />
+              <StepContent
+                todo={this.props.todo}
+                index={this.props.index}
+                editTodo={this.props.editTodo}
+                addTodo={this.props.addTodo}
+                addSubStep={this.props.addStep}
+                removeStep={this.props.remove}
+                stepSelected={this.state.stepSelected}
+                updateSelection={this.updateSelection}
+              />
 
-            <div className="todo-action-buttons">
-              <button className="remove-step-btn" onClick={event => this.handleRemove(event)}>
-                &times;
-              </button>
-              <button className="create-sub-step-btn" onClick={event => this.breakdownStep(event)}>
-                +
-              </button>
+              <div className="todo-action-buttons">
+                <button className="remove-step-btn" onClick={event => this.handleRemove(event)}>
+                  &times;
+                </button>
+                <button className="create-sub-step-btn" onClick={event => this.breakdownStep(event)}>
+                  +
+                </button>
+              </div>
             </div>
-          </div>
-          {subSteps}
-        </li>,
+            {subSteps}
+          </li>
+        </div>,
       ),
     );
   }

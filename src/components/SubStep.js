@@ -88,30 +88,32 @@ const SubStep = ({
 
   return connectDragSource(
     connectDropTarget(
-      <li className="todo-step" style={{ opacity }}>
-        <div className="step-bullet" />
+      <div>
+        <li className="todo-step" style={{ opacity }}>
+          <div className="step-bullet" />
 
-        <div className="expandingTextArea">
-          <div className="dummy-container">
-            <span>
-              {stepValue}
-            </span>
-            <br />
+          <div className="expandingTextArea">
+            <div className="dummy-container">
+              <span>
+                {stepValue}
+              </span>
+              <br />
+            </div>
+            <textarea
+              autoFocus
+              spellCheck="false"
+              value={stepValue}
+              onChange={event => handleChange(event)}
+              onBlur={event => loseFocus(event)}
+              onKeyDown={event => hitEnter(event)}
+            />
           </div>
-          <textarea
-            autoFocus
-            spellCheck="false"
-            value={stepValue}
-            onChange={event => handleChange(event)}
-            onBlur={event => loseFocus(event)}
-            onKeyDown={event => hitEnter(event)}
-          />
-        </div>
 
-        <button className="remove-sub-step-btn" onClick={() => removeStep(todoIndex, index)}>
-          &times;
-        </button>
-      </li>,
+          <button className="remove-sub-step-btn" onClick={() => removeStep(todoIndex, index)}>
+            &times;
+          </button>
+        </li>
+      </div>,
     ),
   );
 };
