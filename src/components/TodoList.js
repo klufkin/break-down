@@ -1,5 +1,5 @@
 import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import Todo from './Todo';
 
 const TodoList = ({

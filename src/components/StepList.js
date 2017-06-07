@@ -1,5 +1,5 @@
 import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import SubStep from './SubStep';
 
 const StepList = ({ steps, todoIndex, todoID, removeStep, addStep, editStep, moveStep }) =>

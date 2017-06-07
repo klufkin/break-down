@@ -361,12 +361,12 @@ body, ul, li, input {
 .todo-enter {
     transition: all 0.2s ease-in;
     transform: translateX(-20%);
-	max-height: 0;
+  	max-height: 0;
     opacity: 0;
 }
 .todo-enter-active {
     transform: translateX(0%);
-	max-height: 58px;
+  	max-height: 58px;
     opacity: 1;
 }
 
@@ -382,15 +382,15 @@ body, ul, li, input {
 
 .substep-enter {
     transition: all 0.2s ease-in;
-	max-height: 0;
+  	max-height: 0;
     opacity: 0;
     transform: translateY(150%);
 }
 
 .substep-enter-active {
 	max-height: 58px;
-    opacity: 1;
-    transform: translateY(0%);
+  opacity: 1;
+  transform: translateY(0%);
 }
 
 .substep-leave {
